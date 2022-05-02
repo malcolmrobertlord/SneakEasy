@@ -104,6 +104,8 @@ namespace SneakEasy.Controllers
             AllSneakers = _context.Sneakers.Include(a => a.CustomerOrders).Include(a => a.Seller).OrderBy(a => a.Name).ToList();
             List<Sneaker> randSneakers = new List<Sneaker>(3);
             Random rand = new Random();
+            if(AllSneakers.Count() > 0)
+            {
             randSneakers.Insert(0, AllSneakers[rand.Next(AllSneakers.Count())]);
             AllSneakers.Remove(randSneakers[0]);
             randSneakers.Insert(0, AllSneakers[rand.Next(AllSneakers.Count())]);
@@ -111,6 +113,7 @@ namespace SneakEasy.Controllers
             randSneakers.Insert(0, AllSneakers[rand.Next(AllSneakers.Count())]);
             AllSneakers.Remove(randSneakers[0]);
             ViewBag.RandomSneakers = randSneakers;
+            }
 
             ViewBag.LoggedIn = _context.Users.FirstOrDefault(a => a.UserId == HttpContext.Session.GetInt32("UserId"));
             
