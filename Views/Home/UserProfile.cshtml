@@ -1,0 +1,81 @@
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="container1 p-3" style="background-color: white; min-height: 800px; border: 4px solid black;">
+
+    <h1>Hey @ViewBag.LoggedIn.Name</h1>
+
+    <div class="row" style="min-height: 300px;">
+        <div class="col-6">
+            <h3>Your Recent Purchases</h3>
+            @if(ViewBag.LoggedIn.MyOrders == null)
+            {
+                <h5>You haven't made any purchases yet!</h5>
+                <a href="/sneakers/all" class="btn btn-primary">Explore All Shoes</a>
+            } else {
+                @foreach(Order s in ViewBag.LoggedIn.MyOrders)
+                {
+                    <div class="d-flex">
+                        <img src="@s.Sneaker.PhotoURL" alt="@s.Sneaker.Name" style="height: 150px; width: 150px;">
+                        <div class="card-body">
+                            <h5 class="card-title">@s.Sneaker.Name</h5>
+                            <p class="card-text">Brand: @s.Sneaker.Brand </p>
+                            <p class="card-text">Size: @s.Sneaker.Size </p>
+                            <p class="card-text">$@s.Sneaker.Price</p>
+                            <p class="card-text">Date Purchased: @s.CreatedAt.ToString("MMMM dd, yyyy")</p>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        <div class="col-6">
+            <h3>Your Recent Sales</h3>
+                @foreach (Sneaker s in ViewBag.AllSneakers)
+                {
+                    if (s.CustomerOrders.Exists(a => a.SneakerId == s.SneakerId) && s.UserId == ViewBag.LoggedIn.UserId)
+                    {
+                        <div class="d-flex">
+                            <img src="@s.PhotoURL" alt="@s.Name" style="height: 150px; width: 150px;">
+                            <div class="card-body">
+                                <h5 class="card-title">@s.Name</h5>
+                                <p class="card-text">Brand: @s.Brand </p>
+                                <p class="card-text">Size: @s.Size </p>
+                                <p class="card-text">$@s.Price</p>
+                                <p class="card-text">Date Sold: @s.CustomerOrders.SingleOrDefault().CreatedAt.ToString("MMMM dd, yyyy")</p>
+                            </div>
+                        </div>
+                    }
+                }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <h3>Your Sneakers Up For Sale</h3>
+            @if(ViewBag.LoggedIn.SneakersBeingSold.Count == 0)
+            {
+                <h5>You haven't put any sneakers up for sale yet!</h5>
+                <a href="/sneakers/add" class="btn btn-secondary">Sell a Pair</a>
+            }
+            @foreach (Sneaker s in ViewBag.LoggedIn.SneakersBeingSold)
+            {
+                if(!s.CustomerOrders.Exists(a => a.SneakerId == s.SneakerId))
+                {
+                <a href="/sneaker/@s.SneakerId">
+                <div class="d-flex">
+                    <img src="@s.PhotoURL" alt="@s.Name" style="height: 150px; width: 150px;">
+                    <div class="card-body">
+                        <h5 class="card-title">@s.Name</h5>
+                            <p class="card-text">Brand: @s.Brand </p>
+                            <p class="card-text">Size: @s.Size </p>
+                            <p class="card-text">$@s.Price</p>
+                    </div>
+                </div>
+                </a>
+                }
+            }
+        </div>
+        <div class="col-6"></div>
+    </div>
+
+</div>

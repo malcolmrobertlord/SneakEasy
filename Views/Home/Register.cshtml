@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Registration";
+}
+
+@model User
+
+<div style="background-color: white; padding: 20px; height: 600px; border: 4px solid black;">
+
+    <div class="d-flex justify-content-between">
+        <h1>Welcome! Please register below:</h1>
+        <a href="/users/login" class="btn btn-primary" style="height: 40px;">Login</a>
+    </div>
+    <div class="w-50">
+
+        <form action="/users/create" method="post">
+            <div class="form-group">
+                <label for="Name">Name</label>
+                <input asp-for="Name" class="form-control">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Email">Email</label>
+                <input asp-for="Email" class="form-control">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Password">Password</label>
+                <input asp-for="Password" class="form-control">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Confirm">Confirm Password</label>
+                <input asp-for="Confirm" class="form-control">
+                <span asp-validation-for="Confirm" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Register" class="btn btn-success">
+            </div>
+        </form>
+    </div>
+</div>
+

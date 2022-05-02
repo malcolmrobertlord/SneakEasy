@@ -1,0 +1,46 @@
+@model Sneaker
+
+<div class="container1 p-3" style="background-color: white; height: 800px; border: 4px solid black;">
+
+    <h1 class="text-center">Sell a Pair of Sneakers</h1> 
+
+    <form action="/sneakers/new" method="post">
+    <div class="form-group w-50">
+        <label for="Name">Name of Shoes</label>
+        <input asp-for="Name" class="form-control">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group w-50">
+        <label for="PhotoURL">Photo of Shoes</label>
+        <input asp-for="PhotoURL" class="form-control">
+        <span asp-validation-for="PhotoURL" class="text-danger"></span>
+    </div>
+    <div class="form-group w-50">
+        <label for="Price">Price</label>
+        <input asp-for="Price" class="form-control">
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <div class="form-group w-50">
+        <label for="Size">Size (in US Men's Sizing)</label>
+        <input asp-for="Size" class="form-control">
+        <span asp-validation-for="Size" class="text-danger"></span>
+    </div>
+    <div class="form-group w-50">
+        <label for="Brand">Brand</label>
+        <select asp-for="Brand" class="form-control w-50">
+                <option value="Adidas">Adidas</option>
+                <option value="Converse">Converse</option>
+                <option value="Jordan">Jordan</option>
+                <option value="Nike">Nike</option>
+                <option value="Puma">Puma</option>
+                <option value="Other">Other</option>
+        </select>
+        <span asp-validation-for="Brand" class="text-danger"></span>
+    </div>
+    <div class="form-group w-50">
+        <input type="submit" value="Submit" class="btn btn-info">
+    </div>
+
+</form>
+
+</div>

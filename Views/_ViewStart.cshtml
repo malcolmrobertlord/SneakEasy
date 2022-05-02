@@ -1,0 +1,8 @@
+﻿@{
+    if (ViewContext.ViewBag.LoggedIn != null)
+    {
+    Layout = "_LoggedInLayout";
+    } else {
+        Layout = "_Layout";
+    }
+}

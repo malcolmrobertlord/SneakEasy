@@ -1,0 +1,29 @@
+@{
+    ViewData["Title"] = "All Sneakers";
+}
+
+<div class="container1 p-3" style="background-color: white; border: 4px solid black;">
+
+    <h1>All Sneakers</h1>
+
+    <div class="d-flex justify-content-around flex-wrap">
+
+    @foreach(Sneaker s in ViewBag.AllSneakers)
+    {
+        if(!s.CustomerOrders.Exists(a => a.SneakerId == s.SneakerId))
+        {
+        <a href="/sneaker/@s.SneakerId">
+        <div class="card mb-5" style="width: 200px; border: none;">
+            <img class="card-img-top" src="@s.PhotoURL" alt="@s.Name" style="height: 200px;">
+            <div class="card-body">
+                <h5 class="card-title">@s.Name</h5>
+                <p class="card-text">Brand: @s.Brand </p>
+                <p class="card-text">Size: @s.Size </p>
+                <p class="card-text">$@s.Price</p>
+            </div>
+        </div>
+        </a>
+        }
+    }
+    </div>
+</div>
